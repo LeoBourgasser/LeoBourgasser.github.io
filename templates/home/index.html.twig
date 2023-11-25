@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ghost Detector{% endblock %}
+
+{% block body %}
+    <div class="button_clue">
+        {% for clue in clues %}
+            <button type="button" class="clue_button {{ clue.name }}" onclick="toggleInvert(this)"></button>
+        {% endfor %}
+    </div>
+    <div class="lst_entite">
+        {% for entite in entites %}
+                <fieldset class="entite">
+                    <legend>
+                        <p>
+                            {{ entite.name }}
+                            {% for clue in entite.clues %}
+                                <img src="{{ asset('image/Clue/'~ clue ~'.png') }}" alt="{{ clue }}" class="img_clue">
+                            {% endfor %}
+                        </p>
+                    </legend>
+                    <main>
+                        <img src="{{ asset('image/Entite/'~ entite.name ~'.png') }}" alt="{{ entite.name }}">
+                            <ul class="tips_list">
+                                {% for tip in entite.tips %}
+                                    <li class="tip">{{ tip }}</li>
+                                {% endfor %}
+                            </ul>
+                            <ul class="sanity">
+                                {% for sanity in entite.sanities %}
+                                    <li>{{ sanity }}</li>
+                                {% endfor %}
+                            </ul>
+                    </main>
+                </fieldset>
+        {% endfor %}
+    </div>
+{% endblock %}
